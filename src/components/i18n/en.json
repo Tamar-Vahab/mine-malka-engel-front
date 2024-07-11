@@ -1,0 +1,152 @@
+{
+    "popUpPage": {
+        "modalTitle": "Your order was successfully plased"
+    },
+    "homePage": {
+        "title": "Home page"
+    },
+    "loginPage": {
+        "title": "Sign in",
+        "email": "Email",
+        "password": "Password",
+        "loginButton": "Sign in",
+        "invalidEmail": "Invalid email format",
+        "invalidPassword": "Password should be at least 8 characters long",
+        "noAccount": "Don't have an account yet? ",
+        "createAccount": "Create an account",
+        "forgot": "Forgot password?",
+        "errorLoging":"One of the data entered is incorrect"
+    },
+    "signUpPage": {
+        "title": "Sign up",
+        "userName": "User name",
+        "email": "Email",
+        "password": "Password",
+        "phoneNumber": "Phone number",
+        "typeName": "Event designer?",
+        "loginButton": "Sign up",
+        "invalidEmail": "Invalid email format",
+        "invalidphoneNumber": "Invalid phone number",
+        "invalidPassword": "Password should be at least 8 characters long",
+        "errorMailExists":"This email account already exists in the system, please enter a new email address",
+        "massage": "You have successfully registered!\n Thanks"
+    },
+    "resetPasswordPage": {
+        "title": "Reset Password",
+        "putEmail": "To reset your password, please enter the email address you registered with.",
+        "resetButton": "Send Email",
+        "invalidEmail": "Invalid email format",
+        "secMassage":"Reset password link has been sent to your email"
+    },
+    "resetPasswordCarePage": {
+        "title": "Set new password",
+        "password1": "Enter your new password",
+        "password2": "Confirm your password",
+        "invalidPassword": "Password should be at least 8 characters long",
+        "invalidPasswordConfirmation": "The passwords do not match",
+        "resetButton": "Confirm",
+        "alertMessage": "your password has been reset successfully"
+    },
+    "contactPage": {
+        "title": "Contact page",
+        "h5contact": "contact"
+    },
+    "shoppingCartPage": {
+        "title": "Shopping Cart",
+        "p1": "your basket is empty",
+        "inCart":"products in your cart",
+        "thItem": "Item",
+        "thQuantity": "Quantity",
+        "thPrice": "Price",
+        "thTotal": "Total",
+        "thActions": "Actions",
+        "removeButton": "Remove",
+        "h3Total": "Total",
+        "clearButton": "Clear Cart",
+        "addButton": "Add Item",
+        "checkoutButton": "Proceed to Checkout",
+        "emptyCartMessage": "Your cart is empty.To checkout add an item to your cart"
+    },
+    "footerPage": {
+        "title": "Footer page",
+        "h2About": "About Us",
+        "p1": "We aim to provide you with the best gifts for every occasion.",
+        "h2QuickLinks": "Quick Links",
+        "linkHome": "Home",
+        "linkProducts": "Products",
+        "linkCart": "Cart",
+        "linkContact": "contact",
+        "contact": "Contact Us",
+        "lableEmail": "Your email address",
+        "lableMessage": "Your message",
+        "buttonSend": "Send",
+        "linkDesignerBirkins": "DesignerBirkins",
+        "linkCongratulationsToTheDonors": "Congratulations to the donors",
+        "linkMyAccount": "my accont",
+        "linkJoys": "joys",
+        "linkCommonQuestions": "Common questions",
+        "linkEvents": "events",
+        "linkTerms": "terms",
+        "linkLogin": "Sign in"
+    },
+    "navPage": {
+        "linkHome": "Home",
+        "linkContact": "Contact",
+        "linCommonQuestions": "FAQ",
+        "linkLogin": "Sign in",
+        "linkProduct": "product list",
+        "linkOrderForm": " Order Form",
+        "linkShoppingCart": " Shopping Cart",
+        "linkStayTuned": "Stay Tuned",
+        "linkDistributionRecord": "Distribution Record"
+    },
+  
+    "productListPage":{
+        "title": "product List",
+        "moreDetails": "more details",
+        "cart":"add to cart",
+        "technicalIssue":"Sorry, technical issue, try to relod your page",
+        "noProducts": "no products!",
+        "minPrice":"min price",
+        "maxPrice":"max price"
+    },
+    "recommendedProducts": {
+        "title": "recommended Products"
+    },
+    "CommonQuestionsPage": {
+        "title": "FAQ",
+        "languageId":2,
+        "FAQlist" : "FAQlistEn",
+        "language":"EN",
+        "question":"questionEn",
+        "answer":"answerEn",
+        "serchTitle":"Start typing  your question..."
+    },
+    "productPage":{
+        "review":"review products"
+
+    },
+    "profilePage":{
+        "title":"Profile",
+        "editButton":"Edit",
+        "saveButton":"Save",
+        "logout":"Logout",
+        "userName": "User name",
+        "email": "Email",
+        "password": "Password",
+        "phoneNumber": "Phone number",
+        "typeName": "Event designer?"
+    },
+    "accountPage":{
+        "errCon":"You are not signed in",
+        "signIn":"Sign in"
+   },
+   "OrderHistoryPage":{
+    "not connect1":"Sorry, you are not connected.",
+    "not connect2":"Log in and you can see your order history",
+    "ordersFor":"orders for",
+    "createdAt":"ordered at",
+    "status":"status",
+    "totalAmount":"total amount"
+   }
+}

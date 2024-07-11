@@ -1,0 +1,164 @@
+{
+    "popUpPage": {
+        "modalTitle": "הזמנתך בוצעה בהצלחה!"
+    },
+    "homePage": {
+        "title": "דף הבית"
+    },
+    "loginPage": {
+        "title": "התחבר",
+        "email": "אימייל",
+        "password": "סיסמה ",
+        "loginButton": "התחבר",
+        "invalidEmail": "פורמט דואר אלקטרוני לא חוקי",
+        "invalidPassword": "הסיסמה צריכה להיות באורך של לפחות 8 תווים",
+        "noAccount": "אין לך חשבון? ",
+        "createAccount": "צור חשבון",
+        "forgot":"שכחת סיסמה?",
+        "errorLoging":"אחד הנתונים הוקש שגוי"
+    },
+    "signUpPage": {
+        "title": "הרשם",
+        "userName": "שם משתמש",
+        "email": "מייל",
+        "password": "סיסמה",
+        "phoneNumber": "מספר טלפון",
+        "typeName": "  מעצב אירועים?",
+        "loginButton": "הרשם",
+        "invalidEmail": "פורמט דואר אלקטרוני לא חוקי",
+        "invalidphoneNumber": "מספר טלפון לא חוקי",
+        "invalidPassword": "הסיסמה צריכה להיות באורך של לפחות 8 תווים",
+        "errorMailExists":"חשבון מייל זה כבר קיים במערכת אנא הזן כתובת מייל חדשה",
+        "massage": "נרשמת בהצלחה!\n תודה"
+
+    },
+    "resetPasswordPage": {
+        "title": "איפוס סיסמה",
+        "putEmail": "כדי לאפס את הסיסמה, בבקשה הזן את כתובת הדוא''ל איתו נרשמת.",
+        "invalidEmail": "פורמט דואר אלקטרוני לא חוקי",
+        "resetButton": "שלח מייל",
+        "secMassage":"קישור לאפס סיסמה נשלח לאימייל שלך"
+    },
+    "resetPasswordCarePage": {
+        "title":  "הגדר סיסמה חדשה",
+        "password1": "הזן את הסיסמה החדשה",
+        "password2": "אמת את הסיסמה",
+        "invalidPassword": "הסיסמה צריכה להיות באורך של לפחות 8 תווים",
+        "invalidPasswordConfirmation": "סיסמהות אינן תואמות",
+        "resetButton": "אשר",
+        "alertMessage": "סיסמתך שונתה בהצלחה"
+    },
+    "contactPage": {
+        "title": "דף התחברות",
+        "h5contact": "יצירת קשר"
+    },
+    "shoppingCartPage": {
+        "title": " סל קניות",
+        "p1": " הסל שלך ריק",
+        "thItem": "מוצר",
+        "thQuantity": "כמות",
+        "thPrice": "מחיר",
+        "thTotal": "סהכ ",
+        "thActions": "פעולות",
+        "removeButton": "הסר",
+        "h3Total": "סהכ",
+        "clearButton": "נקה עגלה ",
+        "addButton": "הוסף פריט",
+        "checkoutButton": "המשך לטופס  ההזמנה",
+        "emptyCartMessage": "העגלה שלך ריקה.כדי להתקדם לטופס ההזמנה הוסף פריט לעגלת הקניות "
+    },
+    "footerPage": {
+        "title": " תחתית עמוד",
+        "h2About": "קצת עלינו",
+        "p1": "אנו שואפים לספק לך את המתנות הטובות ביותר לכל אירוע.",
+        "h2QuickLinks": "קישורים מהירים",
+        "linkHome": "דף בית",
+        "linkProducts": "מוצרים",
+        "linkCart": "סל קניות",
+        "contact": "צור קשר",
+        "linkContact": "יצירת קשר",
+        "lableEmail": "כתובת מייל שלך ",
+        "lableMessage": "ההודעה שלך",
+        "buttonSend": "שלח",
+        "linkDesignerBirkins": "בירכונים מעוצבים",
+        "linkCongratulationsToTheDonors": "ברכות לתורמים",
+        "linkMyAccount": "החשבון שלי",
+        "linkJoys": "שמחות",
+        "linkCommonQuestions": "שאלות נפוצות",
+        "linkEvents": "אירועים",
+        "linkLogin": "התחברות",
+        "linkTerms": "תקנון"
+    },
+    "navPage": {
+        "linkHome": "דף בית",
+        "linCommonQuestions": "שאלות נפוצות",
+        "linkContact": "איש קשר",
+        "linkLogin": "התחברות",
+        "linkProduct": "רשימת מוצרים",
+        "linkOrderForm": "  טופס הזמנות",
+        "linkShoppingCart": "סל קניות",
+        "linkStayTuned":"הישארו מעודכנים",
+        "linkDistributionRecord":"רשימת תפוצה"
+    },
+
+    "productListPage":{
+        "title": "  רשימת מוצרים",
+        "moreDetails": "פרטים נוספים",
+        "cart":"הוספה לסל",
+        "technicalIssue":"מצטערים, תקלה טכנית, נסו לרענן את הדף או להכנס שוב מחדש",
+        "noProducts": "אין מוצרים!",
+        "minPrice":"מחיר מינינלי",
+        "maxPrice":"מחיר מקסימלי "
+    },
+    "recommendedProducts": {
+        "title": "מוצרים מומלצים"
+    },
+    "CommonQuestionsPage": {
+        "title": "שאלות נפוצות",
+        "languageId": 1,
+        "FAQlist": "FAQlistHe",
+        "language": "HE",
+        "question": "questionHe",
+        "answer": "answerHe",
+        "serchTitle":"התחל להקליד את השאלה שלך..."
+    },
+
+    "orderFormPage":{
+        "title":"טופס הזמנה",
+        "name":"שם:",
+        "address":"כתובת:",
+        "phone":"טלפון:",
+        "email":"מייל:",
+        "addLogo":" הוסף לוגו",
+        "selectLogo":"בחר קובץ לוגו :",
+        "fileLogo":"קובץ לוגו:",
+        "buttonSubmitOrder":"שלח הזמנה"
+    },
+    "productPage":{
+        "review":"חוות דעת"
+
+    },
+    "profilePage":{
+        "title":"פרופיל",
+        "editButton":"ערוך",
+        "saveButton":"שמור",
+        "logout":"התנתק",
+        "userName": "שם משתמש",
+        "email": "מייל",
+        "password": "סיסמה",
+        "phoneNumber": "מספר טלפון",
+        "typeName": "  מעצב אירועים?"
+    },
+    "accountPage":{
+         "errCon":"אינך מחובר",
+        "signIn":"התחבר"
+    },
+    "OrderHistoryPage":{
+     "not connect1":"מצטערים, אינך מחובר",
+     "not connect2":"התחבר ותוכל לראות את היסטוריית ההזמנות שלך",
+     "ordersFor":"הזמנות ל",
+     "createdAt":" תאריך הזמנה",
+     "status":"סטטוס",
+     "totalAmount":"סך לתשלום"
+    }
+}
