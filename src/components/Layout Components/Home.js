@@ -7,6 +7,7 @@ export const Home = () => {
     const { t, i18n } = useTranslation();
     return (
        <div>
+        <h1>hello from tami</h1>
         <Banner/>
         <RecommendedProducts/>
         <StayTuned></StayTuned>
