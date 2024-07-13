@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/mine-malka-engel-front/static/css/main.e325da70.css",
-    "main.js": "/mine-malka-engel-front/static/js/main.9c5c8273.js",
+    "main.js": "/mine-malka-engel-front/static/js/main.fd5daf0e.js",
     "static/js/453.60b78aa8.chunk.js": "/mine-malka-engel-front/static/js/453.60b78aa8.chunk.js",
     "static/media/us_flag.png": "/mine-malka-engel-front/static/media/us_flag.17fce3e15ce689f42251.png",
     "static/media/il_flag.png": "/mine-malka-engel-front/static/media/il_flag.ab6d675b67fd45a05b65.png",
     "index.html": "/mine-malka-engel-front/index.html",
     "main.e325da70.css.map": "/mine-malka-engel-front/static/css/main.e325da70.css.map",
-    "main.9c5c8273.js.map": "/mine-malka-engel-front/static/js/main.9c5c8273.js.map",
+    "main.fd5daf0e.js.map": "/mine-malka-engel-front/static/js/main.fd5daf0e.js.map",
     "453.60b78aa8.chunk.js.map": "/mine-malka-engel-front/static/js/453.60b78aa8.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e325da70.css",
-    "static/js/main.9c5c8273.js"
+    "static/js/main.fd5daf0e.js"
   ]
 }
