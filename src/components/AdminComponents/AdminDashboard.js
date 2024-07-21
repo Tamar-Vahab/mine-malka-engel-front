@@ -12,7 +12,7 @@ const AdminDashboard = () => {
   const [showAddModal, setShowAddModal] = useState(false);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
-
+  const [currentImage, setCurrentImage] = useState(null);
   const [prdoId, setPrdoId] = useState('');
   const [nameHe, setNameHe] = useState('');
   const [descriptionHe, setDescriptionHe] = useState('');
@@ -22,6 +22,8 @@ const AdminDashboard = () => {
   const [salePrice, setSalePrice] = useState('');
   const [image, setImage] = useState(null);
   const [recommaned, setRecommaned] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [what, setWhat] = useState('');
   const myDispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -48,6 +50,7 @@ const AdminDashboard = () => {
   }, []);
 
   const handleShowAddModal = () => {
+    debugger
     setSelectedProduct('');
     setPrdoId('');
     setNameHe('');
@@ -60,9 +63,9 @@ const AdminDashboard = () => {
     setImage('');
     setShowAddModal(true);
   };
-  const handleCloseAddModal = () => setShowAddModal(false);
 
-  const handleShowUpdateModal = (product) => {
+  const handleShowUpdateModal = async (product) => {
+    debugger
     setSelectedProduct(product);
     setPrdoId(product.productID);
     setNameHe(product.nameHe);
@@ -72,13 +75,25 @@ const AdminDashboard = () => {
     setPrice(product.price);
     setSalePrice(product.salePrice);
     setRecommaned(product.isRecommended);
-    setImage(product.imageURL);
+    try {
+      const fileName = product.imageURL.substring(product.imageURL.lastIndexOf('/') + 1);
+      const response = await fetch(`${process.env.REACT_APP_API_URL}${product.imageURL}`);
+      const blob = await response.blob();
+      const file = new File([blob], fileName, { type: blob.type });
+      setCurrentImage(file);
+    } catch (error) {
+      console.error("Error fetching current image:", error);
+      alert("err");
+    }
+    setImage(null);
     setShowUpdateModal(true);
   };
-  const handleCloseUpdateModal = () => setShowUpdateModal(false);
+
+  const handleCloseAddModal = () => {setShowAddModal(false)};
+
+  const handleCloseUpdateModal = () => {setShowUpdateModal(false)};
 
   const handleAddProduct = async (e) => {
-    debugger
     e.preventDefault();
     const formData = new FormData();
     formData.append('NameHe', nameHe);
@@ -99,12 +114,15 @@ const AdminDashboard = () => {
         if (response == true) {
           const productsfromServer = await GetAllProducts();
           myDispatch(setProductList(productsfromServer))
-          setPrdoId(productsfromServer);
+          setProducts(productsfromServer);
         }
     } catch (error) {
       console.error('Error adding product:', error.response || error.message);
       alert('Failed to add product');
     }
+    handleCloseAddModal();
+    setWhat('נוסף'); 
+    setShowSuccess(true);
   };
 
   const handleUpdateProduct = async (e) => {
@@ -123,19 +141,27 @@ const AdminDashboard = () => {
       formData.append('ImageURL', image);
       formData.append('Image', image);
     }
+    else{
+      setImage(currentImage);
+      formData.append('ImageURL', currentImage);
+      formData.append('Image', currentImage);
+
+    }
     try {
       const response = await PutProduct(prdoId, formData);
       //TODO
-      //dispattch to the product list
+      //dispatch to the product list
       if (response == true) {
         const productsfromServer = await GetAllProducts();
         myDispatch(setProductList(productsfromServer))
-        setPrdoId(productsfromServer);
+        setProducts(productsfromServer);
       }
     } catch (error) {
       console.error('Error adding product:', error.response || error.message);
     }
     handleCloseUpdateModal();
+    setWhat('עודכן');
+    setShowSuccess(true);
   };
 
   return (
@@ -252,6 +278,7 @@ const AdminDashboard = () => {
               <label className="form-label">Sale Price</label>
               <input type="number" className="form-control" value={salePrice} onChange={(e) => setSalePrice(e.target.value)} />
             </div>
+            
             <div className="mb-3">
               <label className="form-label">Image</label>
               <input type="file" className="form-control" onChange={(e) => setImage(e.target.files[0])} />
@@ -284,6 +311,17 @@ const AdminDashboard = () => {
           </Button>
         </Modal.Footer>
       </Modal>
+      <Modal show={showSuccess} onHide={() => setShowSuccess(false)} centered>
+                <Modal.Header closeButton>
+                    <Modal.Title>הצלחה!</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    המוצר: {what} בהצלחה!
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="primary" onClick={() => setShowSuccess(false)}>סגור</Button>
+                </Modal.Footer>
+            </Modal>
     </Container>
   );
 };

@@ -24,8 +24,11 @@ export const AddReview = async (reviewToAdd) => {
 }
 
 export const GetReviewByProd = async (prodId) => {
+    debugger
     try {
-        let result = await axios.get(`${API_BASE_URL}/GetReviewByProd/${prodId}`)
+        debugger
+        let result = await axios.get(`${API_BASE_URL}GetReviewByProd/${prodId}`)
+        debugger
         return result
     }
     catch (ch) {

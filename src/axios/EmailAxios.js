@@ -1,41 +1,3 @@
-// import axios from "axios"
-
-// const API_BASE_URL = `${process.env.REACT_APP_API_URL}/api/Email`
-
-// export const SendEmail = async (emailRequest) => {
-//     try {
-//         debugger
-//         let result = await axios.post(`${API_BASE_URL}/send`, emailRequest)
-//         return result
-//     }
-//     catch (ch) {
-//         debugger
-//         console.log(ch)
-//     }
-// }
-
-// export const addEmail = async (newEmail) => {
-//     try {
-//         const response = await axios.put(`${API_BASE_URL}/add-data`, newEmail);
-//         return response;
-//     } catch (error) {
-//         console.error('Error adding category :', error);
-//         throw error;
-//     }
-// };
-
-// export const SendEmails = async (newEmail) => {
-//     try {
-//         const response = await axios.post(`${API_BASE_URL}/send-emails`, newEmail);
-//         return response;
-//     } catch (error) {
-//         console.error('Error adding category :', error);
-//         throw error;
-//     }
-// };
-
-
-
 import axios from "axios"
 const API_BASE_URL = "https://localhost:7297/api/Email"
 export const SendEmail = async (emailRequest) => {
@@ -160,3 +122,13 @@ export const sendEmailsForAllUsers = async ({ Greeting, Subject, Body, Attachmen
     }
   }
 
+
+
+export const getMessage = async () => {
+  try {
+      let result = await axios.get("https://localhost:7297/api/Messages/get-all-messages");
+      return result.data;
+  } catch (error) {
+      console.log(error);
+  }
+}

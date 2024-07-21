@@ -18,52 +18,60 @@ export const OrderForm = () => {
         if (!connected)
             navigate('/myToConnect')
         else {
-            //Add order//
-            const order = {
-                "OrderID": 0,
-                "UserID": currentUser.userID,
-                "TotalAmount": 0,
-                "Status": "Processing",
-                "CreatedAt": "2024-07-07T09:31:32.38"
-            }
-            const result = await PostOrder(order);
-            const orderidToAdd = result
-            // end //
-            if (!orderidToAdd) {
-                alert("Failed to create order, please try again later");
-                return;
-            }
+            if (currentCart.length == 0) { alert('Please select prducts to order'); }
             else {
-                // add item order // 
-                currentCart.map(async (product, index) => {
-                    const listItemOrder = []
-                    currentCart.map((product, i) => {
-                        const itemOrder = {
-                            "OrderItemID": 0,
-                            "OrderID": orderidToAdd,
-                            "ProductID": product.productID,
-                            "Quantity": product.quantity,
-                            "Price": product.price
+                //Add order//
+                const order = {
+                    "OrderID": 0,
+                    "UserID": currentUser.userID,
+                    "TotalAmount": 0,
+                    "Status": "Processing",
+                    "CreatedAt": "2024-07-07T09:31:32.38"
+                }
+                const result = await PostOrder(order);
+                const orderidToAdd = result;
+                // end //
+                if (!orderidToAdd) {
+                    alert("Failed to create order, please try again later");
+                    return;
+                }
+                else {
+                    // add item order // 
+                    currentCart.map(async (product, index) => {
+                        const listItemOrder = []
+                        currentCart.map((product, i) => {
+                            if (product.quantity == undefined)
+                                product.quantity = 1;
+                            //TODO//
+                            //if the quantity is more than 1 - i have to fix this problem!
+                            const itemOrder = {
+                                "OrderItemID": 0,
+                                "OrderID": orderidToAdd,
+                                "ProductID": product.productID,
+                                "Quantity": product.quantity,
+                                "Price": product.price
+                            }
+                            listItemOrder.push(itemOrder);
+                        })
+                        const result = await PostOrderItemList(listItemOrder);
+                        // end //
+                        let tAmount = 0;
+                        for (let i = 0; i < listItemOrder.length; i++) {
+                            tAmount = tAmount + listItemOrder[i].Price * listItemOrder[i].Quantity
                         }
-                        listItemOrder.push(itemOrder);
+                        let order = await GetOrderByOrderId(orderidToAdd);
+                        order.totalAmount = tAmount;
+                        let resultFrUpdate = await PutAllPropOfOrder(orderidToAdd, order);
+                        if (resultFrUpdate) {
+                            alert("Order sent successfully!")
+                        }
+                        else
+                            alert(result);
+                        //delete all data from cookies
+                        clearCart();
+                        navigate('/myHome')
                     })
-                    const result = await PostOrderItemList(listItemOrder);
-                    // end //
-                    //delete all data from cookies
-                    clearCart();
-                    let tAmount = 0;
-                    for (let i = 0; i < listItemOrder.length; i++) {
-                        tAmount = tAmount + listItemOrder[i].Price * listItemOrder[i].Quantity
-                    }
-                    let order = await GetOrderByOrderId(orderidToAdd);
-                    order.TotalAmount = tAmount;
-                    let resultFrUpdate = await PutAllPropOfOrder(orderidToAdd, order);
-                    if (resultFrUpdate) {
-                        <PopUp></PopUp>
-                    }
-                    else
-                        alert(result);
-                })
+                }
             }
         }
     };

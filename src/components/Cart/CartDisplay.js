@@ -1,15 +1,24 @@
-
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { getCart } from "../product/cookies/SetCart";
 import { setCookie } from "../product/cookies/CookieUtils";
 import { useNavigate } from "react-router-dom";
-import { OrderForm } from "../Order/OrderForm";
+import {
+  Container,
+  Grid,
+  Typography,
+  Paper,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemSecondaryAction,
+  IconButton,
+  Button,
+  Box
+} from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
 
-//##################################################//
-//this is th page that loads in the shopping cart //
 export const CartDisplay = () => {
-  // קבלת כל המוצרים מה-Cookies
   const [cart, setCart] = useState(getCart());
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
@@ -19,14 +28,7 @@ export const CartDisplay = () => {
     const newCart = [...cart];
     newCart.splice(index, 1);
     setCart(newCart);
-    setCookie("cart", JSON.stringify(newCart), 7); // עדכון ה-Cookie
-  };
-
-  const handleQuantityChange = (index, quantity) => {
-    const newCart = [...cart];
-    newCart[index].quantity = quantity;
-    setCart(newCart);
-    setCookie("cart", JSON.stringify(newCart), 7); // עדכון ה-Cookie
+    setCookie("cart", JSON.stringify(newCart), 7);
   };
 
   const goToCheckout = () => {
@@ -38,57 +40,75 @@ export const CartDisplay = () => {
   };
 
   return (
-    <div className="container mt-4">
-      <table className="table table-striped">
-        <thead>
-          <tr>
-            <th>{t("Product Name")}</th>
-            <th>{t("Quantity")}</th>
-            <th>{t("Price")}</th>
-            <th>{t("Total")}</th>
-            <th>{t("Actions")}</th>
-          </tr>
-        </thead>
-        <tbody>
+    <Container>
+      <Typography variant="h4" gutterBottom>
+        {t('shoppingCartPage.cartTitle')}
+      </Typography>
+      <Paper elevation={3} sx={{ padding: '20px' }}>
+        <List>
           {cart.map((product, index) => (
-            <tr key={index}>
-              <td><button 
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  color: 'black',
-                  textDecoration: 'none',
-                  cursor: 'pointer',
-                  outline: 'none'
-              }}
-              onClick={()=>{navigate(`/myProduct/${product.productID}`)}}>{product[`name${currentLanguage}`]}</button></td>
-              <td>
-                <input
-                  type="number"
-                  min="1"
-                  className="form-control"
-                  value={product.quantity || 1}
-                  onChange={(e) => handleQuantityChange(index, e.target.value)}
-                />
-              </td>
-              <td>{product.price}</td>
-              <td>{(product.price * (product.quantity || 1)).toFixed(2)}</td>
-              <td>
-                <button
-                  className="btn btn-danger"
-                  onClick={() => handleRemove(index)}
-                >
-                  {t("Remove")}
-                </button>
-              </td>
-            </tr>
+            <ListItem key={index} divider sx={{ alignItems: 'center' }}>
+              <Grid container spacing={2} alignItems="center">
+                <Grid item xs={3}>
+                  <img
+                    src={`${process.env.REACT_APP_API_URL}${product.imageURL}`}
+                    alt={product[`name${currentLanguage}`]}
+                    style={{ width: '100%' }}
+                  />
+                </Grid>
+                <Grid item xs={6}>
+                  <ListItemText
+                    primary={
+                      <Button
+                        style={{
+                          background: 'none',
+                          border: 'none',
+                          color: 'black',
+                          textDecoration: 'none',
+                          cursor: 'pointer',
+                          outline: 'none',
+                          padding: 0
+                        }}
+                        onClick={() => navigate(`/myProduct/${product.productID}`)}
+                      >
+                        {product[`name${currentLanguage}`]}
+                      </Button>
+                    }
+                    secondary={`${t('Price')}: ${product.price} ₪`}
+                  />
+                </Grid>
+                <Grid item xs={2}>
+                  <ListItemText
+                    primary={`${t('Total')}: ${(product.price * (product.quantity || 1)).toFixed(2)} ₪`}
+                  />
+                </Grid>
+                <Grid item xs={1}>
+                  <ListItemSecondaryAction>
+                    <IconButton
+                      edge="end"
+                      aria-label="delete"
+                      onClick={() => handleRemove(index)}
+                    >
+                      <DeleteIcon />
+                    </IconButton>
+                  </ListItemSecondaryAction>
+                </Grid>
+              </Grid>
+            </ListItem>
           ))}
-        </tbody>
-      </table>
-      <div className="text-right">
-        {/* <button className="btn btn-primary" onClick={goToCheckout} >{t("Proceed to Checkout")}</button> */}
-        <OrderForm></OrderForm>
-      </div>
-    </div>
+        </List>
+        <Grid container justifyContent="flex-end" sx={{ marginTop: '20px' }}>
+          <Button
+            variant="contained"
+            color="primary"
+            size="large"
+            onClick={goToCheckout}
+          >
+            {t("Proceed to Checkout")}
+          </Button>
+        </Grid>
+        <Box mt={2} />
+      </Paper>
+    </Container>
   );
 };

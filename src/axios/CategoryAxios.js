@@ -1,9 +1,12 @@
 import axios from 'axios';
 
+
 const API_BASE_URL = `${process.env.REACT_APP_API_URL}/api/Categories/`
 
 export const GetAllCategories = async () => {
+    debugger
     try {
+    //  /Categories/GetAllCategories
         const response = await axios.get(`${API_BASE_URL}GetAllCategories`);
         return response.data;
     } catch (error) {
@@ -13,6 +16,7 @@ export const GetAllCategories = async () => {
 }
 
 export const addCategory = async (category) => {
+    debugger
     try {
         const response = await axios.post(`${API_BASE_URL}AddCategory`, category);
         return response;

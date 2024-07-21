@@ -1,10 +1,9 @@
 import axios from "axios"
 
-const API_BASE_URL = `${process.env.REACT_APP_API_URL}/api/Product/`
+const API_BASE_URL = `${process.env.REACT_APP_API_URL}/api/Product/`;
 
 export const GetAllProducts = async () => {
     try {
-        debugger
         let result = await axios.get(`${API_BASE_URL}GetAllProduct`)
         return result.data
     }
@@ -36,6 +35,7 @@ export const PostProduct = async (productForm) => {
 }
 
 export const PutProduct = async (id, product) => {
+    debugger    
     try {
         let result = await axios.put(`${API_BASE_URL}PutProduct/${id}`, product)
         debugger

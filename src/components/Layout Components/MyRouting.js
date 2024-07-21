@@ -30,6 +30,9 @@ import ProductByCategory from "../product/ProductByCategory.js";
 import { ToConnect } from "../User Forms/ToConnect.js";
 import AllAdminPages from "../AdminComponents/AllAdminPages.js";
 import AllCategories from "../AdminComponents/AllCategories.js";
+import OrderManager from "../AdminComponents/OrderManager.js";
+// import { UnconnectedUser } from "../User Forms/NotConnected.js";
+import { RecommendedProducts } from "../product/RecommendedProducts.js";
 import EmailForm from "../Email/EmailForm.js";
 import MailingList from "../Email/MailingList.js";
 import { useEffect } from "react";
@@ -56,6 +59,8 @@ export const MyRouting = () => {
                 <Nav></Nav>
                 <Routes>
                     {/* basic pages */}
+                    {/*  שימו לב שבגרסה הזאת אין צורך להשתמש בסוויטש אפשר ישר לשים בתוך תגית הראוט */}
+                    <Route path="/" element={<Home></Home>}></Route>
                     <Route path="/myHome" element={<Home></Home>}></Route>
                                                                         
                     {/* user pages */}
@@ -72,8 +77,9 @@ export const MyRouting = () => {
                     {/* product pages */}
                     <Route path="/myProductList" element={<ProductList></ProductList>}></Route>
                     <Route path="/myProduct/:id" element={<Product></Product>} ></Route>
+                    <Route path="/myRecommendedProducts" element={<RecommendedProducts></RecommendedProducts>} ></Route>
                     <Route path="/myShowReviews/:numStars" element={<ShowReviews></ShowReviews>}></Route>
-                    <Route path="/review" element={<Review></Review>}></Route>
+                    <Route path="/myReview/:productId" element={<Review></Review>}></Route>
                     <Route path="/myProductByCategory/:idCategory" element={<ProductByCategory></ProductByCategory>}></Route>
                     <Route path ="/myCategoriesManager" element={<AllCategories></AllCategories>}></Route>
 

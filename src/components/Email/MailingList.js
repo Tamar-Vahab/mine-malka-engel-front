@@ -1,6 +1,6 @@
 //עמוד זה- המנהל שולח מייל עם או בלי קבצים עבור  כתובת אחת
 import React, { useState } from 'react';
-import { Container, Form, Button } from 'react-bootstrap';
+import { Container, Form, Button,Modal } from 'react-bootstrap';
 import { sendEmailsForAllUsers } from '../../axios/EmailAxios';
 
 export const MailingList = () => {
@@ -10,9 +10,13 @@ export const MailingList = () => {
     Body: '',
     Attachments: []
   });
-
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setShowSuccessModal(true); // Show success modal
+    setTimeout(() => {
+      setShowSuccessModal(false); // Close the modal after 2 seconds
+    }, 2000);
     const { Greeting, Subject, Body, Attachments } = newE;
     try {
       await sendEmailsForAllUsers({ Greeting,Subject, Body, Attachments });
@@ -113,6 +117,11 @@ export const MailingList = () => {
           שלח
         </Button>
       </Form>
+      <Modal show={showSuccessModal} onHide={() => setShowSuccessModal(false)}>
+        <Modal.Header closeButton>
+        </Modal.Header>
+        <Modal.Body>נשלח בהצלחה</Modal.Body>
+      </Modal>
     </Container>
   );
 };

@@ -1,18 +1,20 @@
-import { useTranslation } from 'react-i18next';
 import React, { useState, useRef, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { GetAllProducts } from '../../../axios/ProductAxios';
 import { setProductList } from '../../../redux/DataActions/DataAction.Product';
 import { Review } from './Review';
-import { Container, Row, Col, Button } from 'react-bootstrap';
+import { Container, Grid, Typography, Button, Box } from '@mui/material';
 import { Wording } from './Wording';
-import { addToCart, getCart, saveCart } from '../cookies/SetCart';
-import { setCookie } from '../cookies/CookieUtils';
+import { addToCart, getCart, removeFromCart } from '../cookies/SetCart';
+import { fillReviewsProduct } from '../../../redux/DataActions/DataAction.Reviews';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { AdditionalComments } from './AdditionalComments';
 
 export const Product = () => {
     const { t, i18n } = useTranslation();
-    const currentLanguage = i18n.language === "en" ? "En" : "He";
+    const currentLanguage = i18n.language === 'en' ? 'En' : 'He';
     const productsList = useSelector(state => state.DataReducer_Products.Prodlist);
     const { id } = useParams();
     const [products, setProducts] = useState(productsList);
@@ -20,6 +22,7 @@ export const Product = () => {
     const imageRef = useRef(null);
     const scrollToRef = useRef(null);
     const [cart, setCart] = useState(getCart());
+    const navigate = useNavigate();
 
     async function fetchProducts() {
         if (productsList.length === 0) {
@@ -37,6 +40,7 @@ export const Product = () => {
 
     useEffect(() => {
         setCart(getCart());
+        myDispatch(fillReviewsProduct());
     }, []);
 
     const product = products.find(product => product.productID == id);
@@ -45,14 +49,14 @@ export const Product = () => {
         return <div>Loading...</div>;
     }
 
-    const handleMouseMove = (e) => {
+    const handleMouseMove = e => {
         const img = imageRef.current;
         const rect = img.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
 
         img.style.transformOrigin = `${x}px ${y}px`;
-        img.style.transform = 'scale(1.3)';
+        img.style.transform = 'scale(1.5)';
     };
 
     const handleMouseOut = () => {
@@ -60,39 +64,33 @@ export const Product = () => {
         img.style.transform = 'scale(1)';
     };
 
-    const handleScroll = () => {
-        scrollToRef.current.scrollIntoView({ behavior: 'smooth' });
+    const handleAddToCart = product => {
+        addToCart(product);
+        setCart(getCart());
     };
 
-    const handleAddToCart = (product) => {
-        const cartCopy = [...cart];
-        const productIndex = cartCopy.findIndex(p => p.productID === product.productID);
-        if (productIndex !== -1) {
-            cartCopy[productIndex].quantity = (parseInt(cartCopy[productIndex].quantity, 10) || 1) + 1;
-            setCart(cartCopy);
-            setCookie("cart", JSON.stringify(cartCopy), 7); // עדכון ה-Cookie
-
-        } else {
-            addToCart(product);
-            setCart(getCart());
-        }
+    const handleRemoveFromCart = productId => {
+        removeFromCart(productId);
+        setCart(getCart());
     };
 
     const productInCart = cart.find(item => item.productID === product.productID);
 
     return (
-        <Container className="mt-4">
-            <Row>
-                <Col md={5} style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                }}>
-                    <div style={{
-                        overflow: 'hidden',
-                        position: 'relative',
-                        width: '100%',
-                    }}>
+        <Container sx={{ mt: 4 }}>
+            <Grid container spacing={2}>
+                <Grid item xs={12} md={6}>
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            overflow: 'hidden',
+                            position: 'relative',
+                            width: '100%',
+                            height: 'auto'
+                        }}
+                    >
                         <img
                             ref={imageRef}
                             src={`${process.env.REACT_APP_API_URL}${product.imageURL}`}
@@ -100,35 +98,58 @@ export const Product = () => {
                             style={{
                                 width: '100%',
                                 height: 'auto',
-                                transition: 'transform 0.005s, transform-origin 0.005s'
+                                transition: 'transform 0.2s ease-out',
+                                cursor: 'pointer'
                             }}
                             onMouseMove={handleMouseMove}
                             onMouseOut={handleMouseOut}
                         />
-                        <Button className="btn btn-light" onClick={handleScroll} >* {t('productPage.review')}</Button>
-                    </div>
-                </Col>
-                <Col md={7}>
-                    <h2>{product[`name${currentLanguage}`]}</h2>
-                    <p>{product[`description${currentLanguage}`]}</p>
-                    <p className="text-muted">מחיר: {product.price} ש"ח</p>
+                    </Box>
+                </Grid>
+                <Grid item xs={12} md={6}>
+                    <Typography variant="h4" gutterBottom>{product[`name${currentLanguage}`]}</Typography>
+                    <Typography variant="body1" sx={{ fontSize: '1.2rem', lineHeight: 1.6 }} gutterBottom>
+                        {product[`description${currentLanguage}`]}
+                    </Typography>
+                    <Typography variant="body2" color="textSecondary" gutterBottom>
+                        מחיר: {product.price} ש"ח
+                    </Typography>
                     <Wording />
-                    <br />
-                    <button className='btn btn-dark' onClick={() => handleAddToCart(product)}>Add to Cart</button>
-                    {productInCart && (
-                        <div>
-                            <p>You have ordered {productInCart.quantity || 1} of this product</p>
-                        </div>
-                    )}
-                </Col>
-            </Row>
-            <Row>
-                <Col>
-                    <div style={{ marginTop: '150px' }} ref={scrollToRef}>
-                        <Review />
-                    </div>
-                </Col>
-            </Row>
+                    <AdditionalComments />
+                    <Box mt={2}>
+                        {productInCart ? (
+                            <>
+                                <Typography variant="body2" color="error" gutterBottom>
+                                    {t('הזמנת ממוצר זה! ')}
+                                </Typography>
+                                <Button
+                                    variant="contained"
+                                    color="secondary"
+                                    onClick={() => handleRemoveFromCart(product.productID)}
+                                >
+                                    <DeleteIcon /> {t('הסר מהסל ')}
+                                </Button>
+                            </>
+                        ) : (
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                onClick={() => handleAddToCart(product)}
+                            >
+                                {t('הוסף לסל ')}
+                            </Button>
+                        )}
+                    </Box>
+                </Grid>
+            </Grid>
+            <Grid container justifyContent="center" sx={{ mt: 10 }}>
+                <Grid item xs={12}>
+                    <Box ref={scrollToRef}>
+                        <Typography variant="h5">{id}</Typography>
+                        <Review productId={id} />
+                    </Box>
+                </Grid>
+            </Grid>
         </Container>
     );
-}
+};

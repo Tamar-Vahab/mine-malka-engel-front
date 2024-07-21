@@ -68,12 +68,17 @@ export const InitialState_Reviews = {
         //         Comment: "a wanderfull review",
         //         CreatedAt: "2020-09-90"
         //     }
-        ]
+        ],
+        ReviewsProduct: []
 }
 export const DataReducer_Reviews = produce((state, action) => {
     switch (action.type) {
         case 'FILL_REVIEWS_LIST': {
             state.ReviewsList = action.payload;
+            break;
+        }
+        case 'FILL_REVIEWS_FOR_PRODUCT': {
+            state.ReviewsProduct = action.payload;
             break;
         }
         default:

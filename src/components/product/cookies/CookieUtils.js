@@ -2,7 +2,6 @@
 
 // מייצא את הפונקציה setCookie
 export const setCookie = (name, value, days) => {
-    debugger    
     // יצירת משתנה expires שהוא ריק כברירת מחדל
     let expires = "";
     // אם days (מספר הימים) ניתן
